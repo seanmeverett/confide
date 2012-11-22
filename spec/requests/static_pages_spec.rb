@@ -4,15 +4,20 @@ describe "Static pages" do
 
   describe "Home page" do
 
-    it "should have the content 'Confide'" do
+    it "should have the h1 'Confide'" do
       visit '/static_pages/home'
-      page.should have_content('Confide')
+      page.should have_selector('h1', :text => 'Confide')
     end
 
-    it "should have the title 'Home'" do
+    it "should have the base title" do
       visit '/static_pages/home'
       page.should have_selector('title',
-                        :text => "Confide | Home")
+                        :text => "Confide")
+    end
+
+    it "should not have a custom page title" do
+      visit '/static_pages/home'
+      page.should have_selector('title', :text => '| Home')
     end
   end
 
